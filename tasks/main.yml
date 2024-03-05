@@ -7,21 +7,21 @@
   assert:
     that:
       - informix_management_script_templates_path is defined and informix_management_script_templates_path | trim | length > 0
-    msg: "Required variable(s) empty or undefined"
+    msg: "The role variable 'informix_management_script_templates_path' must be set when specifying cron jobs with 'informix_management_cron_jobs'"
   when: informix_management_cron_jobs is defined and informix_management_cron_jobs | length > 0
 
 - name: Check Hashicorp Vault path is set if alerts enabled
   assert:
     that:
       - informix_management_alerts_vault_path is defined and informix_management_alerts_vault_path | trim | length > 0
-    msg: "Role variable informix_management_alerts_vault_path must be provided"
+    msg: "The role variable 'informix_management_alerts_vault_path' must be set when 'informix_management_alerts_enabled' is true"
   when: informix_management_alerts_enabled
 
 - name: Check Hashicorp Vault path is set if stats enabled
   assert:
     that:
       - informix_management_stats_vault_path is defined and informix_management_stats_vault_path | trim | length > 0
-    msg: "Role variable informix_management_stats_vault_path must be provided"
+    msg: "The role variable 'informix_management_stats_vault_path' must be set when 'informix_management_stats_enabled' is true"
   when: informix_management_stats_enabled
 
 - name: Retrieve alerts config from Hashicorp Vault
@@ -42,7 +42,7 @@
     mode: "755"
     state: directory
 
-- name: "Create Informix management log directory"
+- name: "Create Informix management logs directory"
   file:
     path: "{{ informix_management_logs_path }}"
     owner: "{{ informix_management_informix_user }}"
