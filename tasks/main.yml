@@ -59,6 +59,7 @@
     mode: "755"
   with_fileglob:
     - "{{ informix_management_script_templates_path }}/*.j2"
+  when: informix_management_script_templates_path is defined and informix_management_script_templates_path | length > 0
 
 - name: Create Informix cron jobs
   cron:
