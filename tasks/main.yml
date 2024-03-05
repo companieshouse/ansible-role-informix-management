@@ -72,7 +72,8 @@
     user: "{{ informix_management_informix_user }}"
     job: "/home/{{ informix_management_informix_user }}/scripts/{{ item.script }}"
     disabled: "{{ item.disabled | default(false) }}"
-  loop: "{{ informix_management_cron_jobs | default([]) }}"
+  loop: "{{ informix_management_cron_jobs }}"
+  when: informix_management_cron_jobs is defined and informix_management_cron_jobs | length > 0
 
 - name: Configure recipient address for Informix cron jobs
   cronvar:
