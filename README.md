@@ -41,16 +41,14 @@ The `informix_management_cron_jobs` variable can be used to schedule cron jobs f
 
 | Name                 | Default | Description                                                                          |
 |----------------------|---------|--------------------------------------------------------------------------------------|
-| `name`               |         | A description of the job. This parameter should be unique across all jobs defined for a given group. |
-| `day_of_week`        |         | Day of the week that the job should run (`0-6` for Sunday-Saturday, `*`, and so on). |
 | `day_of_month`       |         | Day of the month the job should run (`1-31`, `*`, `*/2`, and so on).                 |
-| `minute`             |         | Minute when the job should run (`0-59`, `*`, `*/2`, and so on).                      |
+| `day_of_week`        |         | Day of the week that the job should run (`0-6` for Sunday-Saturday, `*`, and so on). |
+| `disabled`           | `false` | If the job should be disabled in the crontab (`true` or `false`).                    |
 | `hour`               |         | Hour when the job should run (`0-23`, `*`, `*/2`, and so on).                        |
-| `script`             |         | The name of the script to execute. A Jinja2 template for this script is expected to exist within the directory specified by the `informix_management_script_templates_path` variable, with a `.j2` extension. The `script` parameter value should not include the `.j2` file extension.
-
-> [!TIP]
-> Template script files in the directory specified by the `informix_management_script_templates_path` variable may use role variables to determine if certain role features have been enabled. This is used primarily to control whether alerts and stats generation are performed in particularl scripts, for example by checking the boolean value of the variable `informix_management_stats_enabled`, and then using the `informix_management_stats_config` variable (itself )
-
+| `minute`             |         | Minute when the job should run (`0-59`, `*`, `*/2`, and so on).                      |
+| `month`              |         | The month that the job should run.                                                   |
+| `name`               |         | A description of the job. This parameter should be unique across all jobs defined for a given group. |
+| `script`             |         | The name of the script to execute. A Jinja2 template for this script is expected to exist within the directory specified by the `informix_management_script_templates_path` variable, with a `.j2` extension. The `script` parameter value should not include the `.j2` file extension. |
 
 For example, to execute the `level_zero_backup` script at midnight every day, passing the script the single argument `ef`:
 
@@ -59,6 +57,7 @@ informix_management_cron_jobs:
   - name: Perform level zero backup for EF database
     day_of_week: "*"
     day_of_month: "*"
+    month: "*"
     minute: "0"
     hour: "0"
     script: "level_zero_backup ef"
