@@ -48,13 +48,16 @@
     mode: "755"
     state: directory
 
-- name: "Create Informix management logs directory"
+- name: "Create Informix management log directories"
   file:
-    path: "{{ informix_management_logs_path }}"
+    path: "{{ item }}"
     owner: "{{ informix_management_informix_user }}"
     group: "{{ informix_management_informix_group }}"
     mode: "755"
     state: directory
+  loop:
+    - "{{ informix_management_logs_path }}"
+    - "{{ informix_management_logs_path }}/common"
 
 - name: Install scripts for cron jobs
   template:
