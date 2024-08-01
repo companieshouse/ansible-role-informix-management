@@ -116,3 +116,12 @@
           source "$HOME/scripts/menu"
           menu
       fi
+
+- name: Add scripts directory to PATH environment variable
+  blockinfile:
+    path: "/home/{{ informix_management_informix_user }}/.bashrc"
+    block: |
+      # Add scripts directory to PATH environment variable
+      if [[ -f "$HOME/scripts" ]]; then
+          export PATH="$HOME/scripts:$PATH"
+      fi
