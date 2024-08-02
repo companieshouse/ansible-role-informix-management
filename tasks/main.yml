@@ -109,6 +109,7 @@
 
 - name: Enable interactive menu for Informix user
   blockinfile:
+    marker: "# {mark} ANSIBLE MANAGED MENU BLOCK"
     path: "/home/{{ informix_management_informix_user }}/.bashrc"
     block: |
       # Display interactive menu on login
@@ -119,6 +120,7 @@
 
 - name: Add scripts directory to PATH environment variable
   blockinfile:
+    marker: "# {mark} ANSIBLE MANAGED PATH BLOCK"
     path: "/home/{{ informix_management_informix_user }}/.bashrc"
     block: |
       # Add scripts directory to PATH environment variable
