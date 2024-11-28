@@ -1,3 +1,6 @@
+> [!WARNING]
+> This standalone Ansible Galaxy role has been deprecated and replaced with an `informix_management` role belonging to the Ansible Collection [companieshouse.middleware](https://github.com/companieshouse/ansible-collection-middleware).
+
 # Ansible Role: Informix Management
 
 An [Ansible Galaxy](https://galaxy.ansible.com/) role for configuring cron jobs for Informix databases and providing an interactive menu for working with databases at the command-line.
